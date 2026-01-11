@@ -1,0 +1,45 @@
+- name: Configure Monitoring Server
+  hosts: monitoring
+  become: true
+  roles:
+    - docker
+    - prometheus
+    - grafana
+
+
+- name: Create Prometheus config dir
+  file:
+    path: /opt/prometheus
+    state: directory
+
+- name: Prometheus config
+  copy:
+    dest: /opt/prometheus/prometheus.yml
+    content: |
+      global:
+        scrape_interval: 15s
+
+      scrape_configs:
+        - job_name: 'web-server'
+          static_configs:
+            - targets: ['10.0.0.5:9100']
+
+- name: Run Prometheus
+  community.docker.docker_container:
+    name: prometheus
+    image: prom/prometheus
+    state: started
+    restart_policy: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - /opt/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+- name: Run Grafana
+  community.docker.docker_container:
+    name: grafana
+    image: grafana/grafana
+    state: started
+    restart_policy: always
+    ports:
+      - "3000:3000"

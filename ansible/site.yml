@@ -1,0 +1,24 @@
+---
+# Install docker on every server defined in inventory.ini
+- name: Global Infrastructure Setup
+  hosts: all
+  become: true
+  tasks:
+    - name: Install Docker and Dependencies
+      include_tasks: tasks/install_docker.yml
+
+# Configure the Web Server
+- name: Web Application Deployment
+  hosts: web
+  become: true
+  tasks:
+    - name: Deploy Web App and Exporter
+      include_tasks: tasks/deploy_web.yml
+
+# Configure the Monitoring Server
+- name: Monitoring Stack Deployment
+  hosts: monitoring
+  become: true
+  tasks:
+    - name: Deploy Prometheus and Grafana
+      include_tasks: tasks/deploy_monitoring.yml

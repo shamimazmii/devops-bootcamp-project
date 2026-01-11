@@ -1,0 +1,30 @@
+- name: Clone web app repo
+  git:
+    repo: https://github.com/Infratify/lab-final-project.git
+    dest: /opt/my-devops-project
+    force: yes
+
+- name: Build and Run Web Container
+  community.docker.docker_image:
+    name: my-devops-project
+    build:
+      path: /opt/my-devops-project
+    source: build
+
+- name: Run Web Container
+  community.docker.docker_container:
+    name: my-devops-project
+    image: my-devops-project
+    state: started
+    restart_policy: always
+    ports:
+      - "80:80"
+
+- name: Run Node Exporter (Metrics for Prometheus)
+  community.docker.docker_container:
+    name: node_exporter
+    image: prom/node-exporter:latest
+    state: started
+    restart_policy: always
+    ports:
+      - "9100:9100"
