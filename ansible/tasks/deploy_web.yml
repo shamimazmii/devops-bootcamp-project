@@ -1,26 +1,29 @@
-- name: Clone web app repo
-  git:
-    repo: https://github.com/Infratify/lab-final-project.git
-    dest: /opt/my-devops-project
-    force: yes
+- name: Install AWS CLI (for ECR login)
+  apt:
+    name: awscli
+    state: present
 
-- name: Build and Run Web Container
+- name: Log into ECR
+  shell: "aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 244258095927.dkr.ecr.ap-southeast-1.amazonaws.com/devops-bootcamp/final-project-shamim"
+
+
+- name: Pull Docker Image from ECR
   community.docker.docker_image:
-    name: my-devops-project
-    build:
-      path: /opt/my-devops-project
-    source: build
+    name: "<YOUR_ECR_URL>:latest"
+    source: pull
+    force_source: yes
 
 - name: Run Web Container
   community.docker.docker_container:
     name: my-devops-project
-    image: my-devops-project
+    image: "244258095927.dkr.ecr.ap-southeast-1.amazonaws.com/devops-bootcamp/final-project-shamim:latest"
     state: started
     restart_policy: always
     ports:
       - "80:80"
+    pull: true  # Ensures it always uses the latest version
 
-- name: Run Node Exporter (Metrics for Prometheus)
+- name: Run Node Exporter
   community.docker.docker_container:
     name: node_exporter
     image: prom/node-exporter:latest
