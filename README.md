@@ -1,1 +1,29 @@
-this is a test
+# DevOps Bootcamp Final Project Documentation
+
+Welcome to the documentation for the DevOps Bootcamp Final Project. This project demonstrates an automated infrastructure-as-code (IaC) setup using Terraform and Ansible.
+
+## 🔗 Project Links
+* **Web Application:** [web.yourdomain.com](http://web.yourdomain.com)
+* **Monitoring Dashboard (Grafana):** [monitoring.yourdomain.com](https://monitoring.yourdomain.com)
+* **GitHub Repository:** [github.com/username/devops-bootcamp-project](https://github.com/username/devops-bootcamp-project)
+
+---
+
+## 🛠️ Setup Guide
+
+### 1. Infrastructure Deployment (Terraform)
+1. Initialize Terraform: `terraform init`
+2. Preview changes: `terraform plan`
+3. Deploy resources: `terraform apply -auto-approve`
+4. Copy the Instance IDs from the outputs for the next steps.
+
+### 2. Configuration Management (Ansible)
+1. Log in to the Ansible Controller via SSM:
+   `aws ssm start-session --target <ANSIBLE_INSTANCE_ID>`
+2. Run the master playbook:
+   `ansible-playbook site.yml`
+
+### 3. Monitoring Setup
+1. Use Cloudflare Tunnel to expose the Monitoring Server securely.
+2. Access Grafana at your monitoring URL.
+3. Import Dashboard ID `1860` to see Web Server metrics (CPU, RAM, Disk).
