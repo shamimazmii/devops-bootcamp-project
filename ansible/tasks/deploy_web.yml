@@ -22,11 +22,6 @@
   args:
     creates: /usr/local/bin/aws
 
-- name: Install AWS CLI (for ECR login)
-  apt:
-    name: awscli
-    state: present
-
 - name: Log into ECR
   shell: "aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 244258095927.dkr.ecr.ap-southeast-1.amazonaws.com/devops-bootcamp/final-project-shamim"
 
