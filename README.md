@@ -3,8 +3,8 @@
 Welcome to the documentation for the DevOps Bootcamp Final Project. This project demonstrates an automated infrastructure-as-code (IaC) setup using Terraform and Ansible.
 
 ## 🔗 Project Links
-* **Web Application:** [web.shamimazmii.com](http://web.yourdomain.com)
-* **Monitoring Dashboard (Grafana):** [monitoring.shamimazmii.com](https://monitoring.yourdomain.com)
+* **Web Application:** [web.shamimazmii.com](http://web.shamimazmii.com)
+* **Monitoring Dashboard (Grafana):** [monitoring.shamimazmii.com](https://monitoring.shamimazmii.com)
 
 ---
 
