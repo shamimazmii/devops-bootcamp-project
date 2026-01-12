@@ -13,8 +13,8 @@ Welcome to the documentation for the DevOps Bootcamp Final Project. This project
 4. Copy the Instance IDs from the outputs for the next steps.
 
 ### 2. Configuration Management (Ansible)
-1. Log in to the Ansible Controller via SSM on AWS or you can run below via cli:
-   `aws ssm start-session --target <ANSIBLE_INSTANCE_ID>`
+1. Log in to the Ansible Controller via SSM:
+   `aws ssm start-session --target <ANSIBLE_INSTANCE_ID> (from your local wsl)`
 2. Run the master playbook:
    `ansible-playbook site.yml`
 
