@@ -1,3 +1,27 @@
+- name: Install dependencies for AWS CLI
+  apt:
+    name:
+      - unzip
+      - curl
+    state: present
+    update_cache: yes
+
+- name: Download AWS CLI v2 installer
+  get_url:
+    url: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
+    dest: "/tmp/awscliv2.zip"
+
+- name: Unarchive AWS CLI installer
+  unarchive:
+    src: "/tmp/awscliv2.zip"
+    dest: "/tmp"
+    remote_src: yes
+
+- name: Run AWS CLI installer
+  shell: "/tmp/aws/install --update"
+  args:
+    creates: /usr/local/bin/aws
+
 - name: Install AWS CLI (for ECR login)
   apt:
     name: awscli
