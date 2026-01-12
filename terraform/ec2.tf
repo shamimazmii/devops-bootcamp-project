@@ -26,6 +26,7 @@ resource "aws_instance" "ansible" {
   vpc_security_group_ids      = [aws_security_group.private.id]
   associate_public_ip_address = false
   private_ip                  = "10.0.0.135"
+  key_name                    = "my-key"
   iam_instance_profile = aws_iam_instance_profile.ssm_profile.name
   user_data_replace_on_change = true
   user_data = <<-EOF
@@ -37,8 +38,12 @@ resource "aws_instance" "ansible" {
     sudo apt install ansible -y
     sudo systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
 	  sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
-    ansible-galaxy install geerlingguy.docker
     ansible-galaxy collection install community.docker
+
+    cat <<'KEY' > /root/.ssh/my-key.pem
+    ${file(var.private_key_path)}
+    KEY
+    chmod 400 /root/.ssh/my-key.pem
   EOF
 
   tags = {
