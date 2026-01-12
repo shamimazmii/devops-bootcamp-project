@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "app_repo" {
-  name                 = "my-devops-project"
+  name                 = "devops-bootcamp/final-project-shamim"
   image_tag_mutability = "MUTABLE"
   force_delete         = true
 

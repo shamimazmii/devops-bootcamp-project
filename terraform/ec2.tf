@@ -116,8 +116,3 @@ output "web_server_instance_id" {
   description = "The Instance ID of the Web Server EC2 instance."
   value       = aws_instance.web.id
 }
-
-output "web_server_private_ip" {
-  description = "The private IP of the Web Server EC2 instance."
-  value       = aws_instance.web.private_ip
-}
