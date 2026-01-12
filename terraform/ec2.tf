@@ -39,11 +39,6 @@ resource "aws_instance" "ansible" {
     sudo systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
 	  sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
     ansible-galaxy collection install community.docker
-
-    cat <<'KEY' > /root/.ssh/my-key.pem
-    ${file(var.private_key_path)}
-    KEY
-    chmod 400 /root/.ssh/my-key.pem
   EOF
 
   tags = {
