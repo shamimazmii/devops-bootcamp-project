@@ -2,14 +2,9 @@
 
 Welcome to the documentation for the DevOps Bootcamp Final Project. This project demonstrates an automated infrastructure-as-code (IaC) setup using Terraform and Ansible.
 
-## 🔗 Project Links
-* **Web Application:** [web.yourdomain.com](http://web.yourdomain.com)
-* **Monitoring Dashboard (Grafana):** [monitoring.yourdomain.com](https://monitoring.yourdomain.com)
-* **GitHub Repository:** [github.com/username/devops-bootcamp-project](https://github.com/username/devops-bootcamp-project)
-
 ---
 
-## 🛠️ Setup Guide
+##  Setup Guide
 
 ### 1. Infrastructure Deployment (Terraform)
 1. Initialize Terraform: `terraform init`
@@ -19,7 +14,7 @@ Welcome to the documentation for the DevOps Bootcamp Final Project. This project
 
 ### 2. Configuration Management (Ansible)
 1. Log in to the Ansible Controller via SSM:
-   `aws ssm start-session --target <ANSIBLE_INSTANCE_ID>`
+   `aws ssm start-session --target <ANSIBLE_INSTANCE_ID> (from your local wsl)`
 2. Run the master playbook:
    `ansible-playbook site.yml`
 
