@@ -39,11 +39,6 @@ resource "aws_instance" "ansible" {
     sudo systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
 	  sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
     ansible-galaxy collection install community.docker
-
-    cat <<'KEY' > /root/.ssh/my-key.pem
-    ${file(var.private_key_path)}
-    KEY
-    chmod 400 /root/.ssh/my-key.pem
   EOF
 
   tags = {
@@ -100,6 +95,11 @@ resource "aws_iam_instance_profile" "ssm_profile" {
   role = aws_iam_role.ssm_role.name
 }
 
+# Add ECR Access to the existing SSM Role
+resource "aws_iam_role_policy_attachment" "ecr_access" {
+  role       = aws_iam_role.ssm_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser"
+}
 
 #Outputs
 output "ansible_controller_instance_id" {
