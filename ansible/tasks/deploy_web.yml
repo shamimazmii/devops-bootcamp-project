@@ -9,7 +9,7 @@
 
 - name: Pull Docker Image from ECR
   community.docker.docker_image:
-    name: "<YOUR_ECR_URL>:latest"
+    name: "244258095927.dkr.ecr.ap-southeast-1.amazonaws.com/devops-bootcamp/final-project-shamim:latest"
     source: pull
     force_source: yes
 
